@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="weatherApp.css" />
+    <script src="weatherApp.js" defer></script>
+  </head>
+  <body id="screen">
+    <div id="weather-effects"></div>
+    <div id="weather-window">
+      <div id="location">
+        <div id="location-set">
+          <img src="pointerImage.png" class="locPoint-image" />
+          <h2 id="location-name">Location</h2>
+          <div id="location-change">
+            <form id="location-form" method="post">
+              <input
+                type="text"
+                id="location-input"
+                name="location-name"
+                placeholder="Enter Location..."
+                required
+              />
+              <input
+                type="submit"
+                id="submitbtn"
+                value="Search"
+                name="search"
+              />
+            </form>
+          </div>
+        </div>
+        <div id="clock">00:00:00</div>
+      </div>
+
+      <div id="temp-info">
+        <h1 class="temperature">0°C</h1>
+        <h3 class="weather-description">Clear</h3>
+      </div>
+      <p id="hypo">↑ 0° / ↓ 0°</p>
+
+      <div id="weather-suggestions">
+        <h3>Suggestions</h3>
+        <ul id="suggestion-list"></ul>
+      </div>
+
+      <div id="more">
+        <div class="humidity">
+          <div class="humidity-container">
+            <img src="humidity-image.png" id="humidity-image" />
+            <h4 class="humidity-name">Humidity</h4>
+          </div>
+          <p class="measure-humidity">0%</p>
+          <div class="humidity-bar">
+            <div id="humidity-fill"></div>
+          </div>
+        </div>
+
+        <div class="wind-speed">
+          <div class="wind-container">
+            <img src="wind-image.png" id="wind-image" />
+            <h4 class="wind-name">Wind Speed</h4>
+          </div>
+          <div class="wind-meter">
+            <svg viewBox="0 0 120 120">
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                stroke="rgba(255,255,255,0.2)"
+                stroke-width="8"
+                fill="none"
+              />
+
+              <circle
+                id="wind-progress"
+                cx="60"
+                cy="60"
+                r="50"
+                stroke="white"
+                stroke-width="8"
+                fill="none"
+                stroke-linecap="round"
+                stroke-dasharray="314"
+                stroke-dashoffset="314"
+              />
+            </svg>
+
+            <div class="wind-text">
+              <span id="wind-speed">0</span>
+              km/h
+            </div>
+          </div>
+        </div>
+
+        <div class="visibility">
+          <div class="visibility-container">
+            <img src="visibility-image.png" id="visibility-image" />
+            <h4 class="visibility-name">Visibility</h4>
+          </div>
+          <div class="visibility-meter">
+            <div class="visibility-value">
+              <span id="visibility-km">0</span> km
+            </div>
+
+            <div class="visibility-bar">
+              <div id="visibility-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pressure">
+          <div class="pressure-container">
+            <img src="pressure-image.png" id="pressure-image" />
+            <h4 class="pressure-name">Pressure</h4>
+          </div>
+          <div class="pressure-meter">
+            <svg viewBox="0 0 200 120">
+              <path
+                d="M20 100 A80 80 0 0 1 180 100"
+                stroke="rgba(255,255,255,0.2)"
+                stroke-width="12"
+                fill="none"
+              />
+
+              <path
+                id="pressure-progress"
+                d="M20 100 A80 80 0 0 1 180 100"
+                stroke="white"
+                stroke-width="12"
+                fill="none"
+                stroke-linecap="round"
+                stroke-dasharray="251"
+                stroke-dashoffset="251"
+              />
+            </svg>
+
+            <div class="pressure-text">
+              <span id="pressure-value">0</span> hPa
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
