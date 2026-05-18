@@ -1,6 +1,6 @@
 <?php
+include "config.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $apiKey = "fa38a17e6900519044fb8c87d3916132";
     if (isset($_POST["lat"]) && isset($_POST["lon"])) {
         $lat = $_POST["lat"];
         $lon = $_POST["lon"];
