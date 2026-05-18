@@ -1,4 +1,4 @@
-function tempBg(){
+function tempBg() {
   document.getElementById("screen").classList.add("temporary-background");
 }
 tempBg();
@@ -58,28 +58,27 @@ function getWeatherByCoords(lat, lon) {
     .then(updateUI);
 }
 
-function createRain(){
+function createRain() {
   const container = document.getElementById("weather-effects");
   container.innerHTML = "";
-  for(let i = 0; i < 150; i++){
+  for (let i = 0; i < 150; i++) {
     const drop = document.createElement("div");
     drop.className = "rain-drop";
-    drop.style.top = Math.random()*100 + "%";
-    drop.style.left = Math.random()*100 + "%";
+    drop.style.top = Math.random() * 100 + "%";
+    drop.style.left = Math.random() * 100 + "%";
     container.appendChild(drop);
   }
-
 }
-function createStars(){
+function createStars() {
   const container = document.getElementById("weather-effects");
   container.innerHTML = "";
 
-  for(let i = 0; i < 120; i++){
+  for (let i = 0; i < 120; i++) {
     const star = document.createElement("div");
     star.className = "star";
 
-    star.style.top = Math.random()*100 + "%";
-    star.style.left = Math.random()*100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.left = Math.random() * 100 + "%";
 
     container.appendChild(star);
   }
@@ -105,7 +104,7 @@ function updateUI(data) {
   document.querySelector(".weather-description").innerText = data.desc;
   document.querySelector(".measure-humidity").innerText = data.humidity + "%";
   document.getElementById("humidity-fill").style.width = data.humidity + "%";
-  
+
   //wind
   let windKm = data.wind * 3.6;
   document.getElementById("wind-speed").innerText = Math.round(windKm);
@@ -130,18 +129,16 @@ function updateUI(data) {
   let percent = (visibilityKm / 10) * 100;
   document.getElementById("visibility-fill").style.width = percent + "%";
 
-  // Weather Suggestions 
+  // Weather Suggestions
   let suggestions = [];
 
   // Temperature suggestions
   if (data.temp >= 35) {
     suggestions.push("🔥 High temperature. Stay hydrated.");
     suggestions.push("☀️ Avoid direct sunlight during afternoon.");
-  }
-  else if (data.temp <= 15) {
+  } else if (data.temp <= 15) {
     suggestions.push("🧥 Cold weather. Wear warm clothes.");
-  }
-  else {
+  } else {
     suggestions.push("🌤️ Pleasant weather for outdoor activities.");
   }
 
@@ -177,7 +174,7 @@ function updateUI(data) {
   let suggestionList = document.getElementById("suggestion-list");
   suggestionList.innerHTML = "";
 
-  suggestions.forEach(function(item){
+  suggestions.forEach(function (item) {
     let li = document.createElement("li");
     li.innerText = item;
     suggestionList.appendChild(li);
@@ -192,43 +189,53 @@ function updateUI(data) {
     "cloudy-day",
     "rainy-day",
     "clear-night",
-    "cloudy-night"
+    "cloudy-night",
   );
 
   // Detect day or night using real time
-  const currentTime = data.currentTime;
+  const currentTime = data.dt;
   const sunrise = data.sunrise;
   const sunset = data.sunset;
 
   const isDay = currentTime >= sunrise && currentTime < sunset;
 
-  
   const effects = document.getElementById("weather-effects");
   effects.innerHTML = "";
 
   if (weatherMain.includes("clear") && isDay) {
     screen.classList.add("sunny-day");
     effects.innerHTML = '<div class="sun"></div>';
-  } 
-  else if (weatherMain.includes("clear") && !isDay) {
+  } else if (weatherMain.includes("clear") && !isDay) {
     screen.classList.add("clear-night");
     createStars();
-  } 
-  else if (weatherMain.includes("cloud") && isDay) {
+  } else if (weatherMain.includes("cloud") && isDay) {
     screen.classList.add("cloudy-day");
     effects.innerHTML = '<div class="cloud"></div>';
-  } 
-  else if (weatherMain.includes("cloud") && !isDay) {
+  } else if (weatherMain.includes("cloud") && !isDay) {
     screen.classList.add("cloudy-night");
     effects.innerHTML = '<div class="cloud"></div>';
-  } 
-  else if (weatherMain.includes("rain")) {
+  } else if (weatherMain.includes("rain")) {
     screen.classList.add("rainy-day");
     createRain();
-  } 
-  else {
-    screen.classList.add("sunny-day");
-    effects.innerHTML = '<div class="sun"></div>';
+  } else if (
+    weatherMain.includes("haze") ||
+    weatherMain.includes("mist") ||
+    weatherMain.includes("fog") ||
+    weatherMain.includes("smoke")
+  ) {
+    if (isDay) {
+      screen.classList.add("cloudy-day");
+    } else {
+      screen.classList.add("cloudy-night");
+    }
+  } else {
+    if (isDay) {
+      screen.classList.add("sunny-day");
+      effects.innerHTML = '<div class="sun"></div>';
+    } else {
+      screen.classList.add("clear-night");
+      createStars();
+    }
   }
 }
 
@@ -243,9 +250,9 @@ document.getElementById("location-name").onclick = function () {
   if (input.style.display === "none" || input.style.display === "") {
     input.style.display = "block";
     document.getElementById("location-input").focus();
-    document.getElementById("submitbtn").onclick=function(){
-      if(document.getElementById("location-input").value.trim()!==""){
-        input.style.display="none";
+    document.getElementById("submitbtn").onclick = function () {
+      if (document.getElementById("location-input").value.trim() !== "") {
+        input.style.display = "none";
       }
     };
   } else {
@@ -263,6 +270,7 @@ document
   .addEventListener("submit", function (e) {
     e.preventDefault();
     getWeatherByCity();
-    document.getElementById("location-input").value="";
-    document.getElementById("location-input").ariaPlaceholder="Enter location...";
+    document.getElementById("location-input").value = "";
+    document.getElementById("location-input").ariaPlaceholder =
+      "Enter location...";
   });
