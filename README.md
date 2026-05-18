@@ -11,6 +11,7 @@ The app fetches live weather data from a weather API and displays detailed weath
  - Smart weather suggestions
  - Responsive modern UI
  - Live weather API integration
+
 🛠️ Technologies Used
  - HTML5
  - CSS
