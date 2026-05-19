@@ -1,7 +1,16 @@
+*{
+  box-sizing:border-box;
+}
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  overflow-x:hidden;
+}
 #screen {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,32 +110,35 @@
 
 #temp-info {
   display: flex;
+  flex-wrap:wrap;
+  gap:10px;
   justify-content: space-between;
   align-items: center;
   height: 100px;
 }
 .temperature {
-  font-size: 50px;
+  font-size:clamp(36px,8vw,60px);
   font-weight: bold;
   text-align: left;
   margin-left: 30px;
 }
 .weather-description {
-  font-size: 30px;
+  font-size:clamp(18px,4vw,32px);
   text-align: right;
   margin-right: 30px;
 }
 #hypo {
   display: flex;
-  margin-left: 35px;
+  margin-left: 38px;
+  margin-bottom:30px;
   align-items: center;
   height: 10px;
 }
 #more {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  min-height: 500px;
-  margin: 25px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap: 20px;
+  margin: 20px;
   border-radius: 30px;
   padding: 20px;
   background: rgba(32, 13, 243, 0.12);
@@ -147,6 +159,7 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
+  min-width: 0;
   justify-content: center;
 }
 .measure-humidity {
@@ -175,9 +188,9 @@
 }
 .wind-meter {
   position: relative;
-  width: 120px;
+  width:min(120px,30vw);
+  height:min(120px,30vw);
   margin-top: 10px;
-  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -194,7 +207,7 @@
 }
 .pressure-meter {
   position: relative;
-  width: 180px;
+  width:min(180px,40vw);
   height: 110px;
   margin-top: 10px;
 }
@@ -234,7 +247,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 24px;
-  margin: 18px;
+  margin: 10px;
   background: rgba(7, 22, 184, 0.12);
   backdrop-filter: blur(12px);
 }
@@ -248,7 +261,7 @@
   overflow:hidden;
 }
 .sun{
-  position:fixed;
+  position:absolute;
   top:20%;
   left:52%;
   transform:translate(-80%,-48%);
@@ -317,7 +330,7 @@
 }
 #weather-suggestions ul{
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
   gap: 10px;
 }
 #weather-suggestions h3{
@@ -326,12 +339,10 @@
   font-size: 22px;
   font-weight: 600;
 }
-
 #suggestion-list{
   padding-left: 0px;
   margin: 0;
 }
-
 #suggestion-list li{
   margin-bottom: 12px;
   line-height: 1.6;
@@ -340,4 +351,28 @@
   background: rgba(255,255,255,0.08);
   padding: 12px;
   border-radius: 12px;
+}
+
+@media (max-width:768px){
+  #location{
+    padding:10px;
+  }
+  #temp-info{
+    margin:0 10px;
+  }
+  .temperature{
+    margin-left:10px;
+  }
+  .weather-description{
+    margin-right:10px;
+  }
+  #hypo{
+    margin-left:15px;
+    flex-wrap:wrap;
+  }
+  #more{
+    margin:15px;
+    padding:15px;
+    gap:15px;
+  }
 }
